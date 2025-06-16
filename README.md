@@ -1,89 +1,51 @@
+# Bug Tracker Client
 
-This directory contains the Node.js/Express backend API for the Bug Tracking System.
+This directory contains the React frontend for the Bug Tracking System, built with Create React App.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
 
 * **Node.js**: Version 18.x or higher. You can download it from [nodejs.org](https://nodejs.org/).
-* **MySQL**: Version 8.x or higher. You can install it via [Homebrew](https://brew.sh/) (`brew install mysql`) or from the official [MySQL website](https://dev.mysql.com/downloads/).
 
 ## Installation Steps
 
-1.  **Clone the Repository** (or download the source code).
+1.  **Navigate to the Client Directory**
+    From the project's root directory, move into the `/client` folder.
     ```bash
-    git clone <your-repository-url>
-    cd <your-repository-name>/server
+    cd client
     ```
 
 2.  **Install Dependencies**
-    From within the `/server` directory, run the following command to install all the necessary Node.js packages.
+    Run the following command to install all the necessary Node.js packages for the React application.
     ```bash
     npm install
     ```
 
 ## Configuration
 
-The server's configuration is managed through environment variables.
+The client application needs to know the address of the backend server API.
 
-1.  **Create an Environment File**
-    In the `/server` directory, you will find a file named `.env.example`. Make a copy of this file and rename it to `.env`.
-    ```bash
-    cp .env.example .env
+1.  **Set the API Base URL**
+    Open the file located at `client/src/services/api.js`.
+
+2.  **Verify the `baseURL`**
+    Ensure the `baseURL` property points to the correct address and port of your running server. For local development, this should typically be:
+    ```javascript
+    const api = axios.create({
+      baseURL: 'http://localhost:3000/api', // Default for this project
+    });
     ```
 
-2.  **Edit the `.env` File**
-    Open the newly created `.env` file in a text editor and fill in your specific configuration details.
+## Serving the Application
 
-    ```dotenv
-    # Server Configuration
-    PORT=3000
+Once installation and configuration are complete, you can start the React development server.
 
-    # MySQL Database Configuration
-    DB_HOST=localhost
-    DB_PORT=3306
-    DB_USER=your_db_user # e.g., root
-    DB_PASSWORD=your_db_password
-    DB_NAME=bug_tracker_db
-
-    # JWT Secret for Token Generation
-    JWT_SECRET=your_super_secret_jwt_key
-    ```
-
-## Database Setup (Migrations)
-
-This project uses raw SQL scripts for database setup instead of a formal migration tool.
-
-1.  **Create the Database**
-    Log in to your MySQL instance and create the database for the application.
-    ```sql
-    CREATE DATABASE bug_tracker_db;
-    ```
-
-2.  **Run Migrations (Create Tables)**
-    From your terminal, navigate to the `db/` directory located in the project's root. Run the following command to execute the schema script, which will create all the necessary tables, columns, and indexes. You will be prompted for your MySQL user's password.
-    ```bash
-    # Make sure you are in the db/ directory
-    mysql -u your_db_user -p bug_tracker_db < schema.sql
-    ```
-
-3.  **Seed the Database (Optional)**
-    To populate the database with sample data (2 users, 2 projects, etc.), run the following command from the `db/` directory.
-    ```bash
-    mysql -u your_db_user -p bug_tracker_db < sample_data.sql
-    ```
-
-## Running the Server
-
-Once installation and configuration are complete, you can start the server.
-
-* **For Development (with auto-reloading):**
-    ```bash
-    npm run dev
-    ```
-    The server will start on the port specified in your `.env` file (e.g., `http://localhost:3000`) and will automatically restart when you save changes to a file.
-
-* **For Production:**
+1.  **Start the Development Server**
+    From within the `/client` directory, run:
     ```bash
     npm start
     ```
+
+2.  **View the Application**
+    This will automatically open a new tab in your web browser pointing to `http://localhost:3001` (or the next available port). The application will automatically reload if you make changes to the source code.
