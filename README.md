@@ -1,4 +1,3 @@
-# Bug Tracker Server
 
 This directory contains the Node.js/Express backend API for the Bug Tracking System.
 
